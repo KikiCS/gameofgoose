@@ -70,7 +70,7 @@ def generate_dice_faces_diagram(dice_values: list[int]):
 
     # Generate header with the word "RESULTS" centered
     width = len(dice_faces_rows[0])
-    diagram_header = " RESULTS ".center(width, "~")
+    diagram_header = " RISULTATO ".center(width, "~")
 
     dice_faces_diagram = "\n".join([diagram_header] + dice_faces_rows)
     return dice_faces_diagram
