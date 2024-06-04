@@ -24,7 +24,7 @@ while not game_over:
     print("--- Nuovo turno! ---")
     for i, player in enumerate(players):
         print(f"Tocca al giocatore {i + 1}, è alla casella {player.index}.")
-        if not player.can_move_next_turn():
+        if not player.can_move_next_turn:
             print(
                 f"Il giocatore {i + 1} è alla taverna e riprenderà a giocare il prossimo turno."
             )
