@@ -16,17 +16,20 @@ num_of_players = input(
 )
 NUM_PLAYERS = max(min(int(num_of_players), 6), 2)
 
-players = [Player() for n in range(NUM_PLAYERS)]
+players = [
+    Player(name=input(f"Inserisci il nome del giocatore {n + 1}:\n"))
+    for n in range(NUM_PLAYERS)
+]
 board = Board()
 game_over = False
 
 while not game_over:
     print("--- Nuovo turno! ---")
     for i, player in enumerate(players):
-        print(f"Tocca al giocatore {i + 1}, è alla casella {player.index}.")
+        print(f"Tocca a {player}, è alla casella {player.index}.")
         if not player.can_move_next_turn:
             print(
-                f"Il giocatore {i + 1} è alla taverna e riprenderà a giocare il prossimo turno."
+                f"Il giocatore {player} è alla taverna e riprenderà a giocare il prossimo turno."
             )
             player.can_move_next_turn = True
             break
@@ -37,9 +40,9 @@ while not game_over:
         print(f"\n{ascii_dices}")
         print(f"Esce {steps}!")
         board.move_player(player=player, steps=steps)
-        print(f"Il giocatore {i +1} si sposta sulla casella {player.index}.")
+        print(f"Il giocatore {player} si sposta sulla casella {player.index}.")
         if board.game_is_over(player):
-            print(f"Il giocatore {i +1} ha vinto!")
+            print(f"Il giocatore {player} ha vinto!")
             game_over = True
             break
 
