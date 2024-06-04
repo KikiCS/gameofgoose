@@ -33,19 +33,19 @@ while not game_over:
                 f"Il giocatore {player} è alla taverna e riprenderà a giocare il prossimo turno."
             )
             player.can_move_next_turn = True
-            break
-        input("Premi invio per tirare i dadi...")
-        dice_values = lancio_i_dadi()
-        ascii_dices = generate_dice_faces_diagram(dice_values)
-        steps = sum(dice_values)
-        print(f"\n{ascii_dices}")
-        print(f"Esce {steps}!")
-        board.move_player(player=player, steps=steps)
-        print(f"Il giocatore {player} si sposta sulla casella {player.index}.")
-        if board.game_is_over(player):
-            print(f"Il giocatore {player} ha vinto!")
-            game_over = True
-            break
+        else:
+            input("Premi invio per tirare i dadi...")
+            dice_values = lancio_i_dadi()
+            ascii_dices = generate_dice_faces_diagram(dice_values)
+            steps = sum(dice_values)
+            print(f"\n{ascii_dices}")
+            print(f"Esce {steps}!")
+            board.move_player(player=player, steps=steps)
+            print(f"Il giocatore {player} si sposta sulla casella {player.index}.")
+            if board.game_is_over(player):
+                print(f"Il giocatore {player} ha vinto!")
+                game_over = True
+                break
 
 
 print("Il gioco è finito!")
