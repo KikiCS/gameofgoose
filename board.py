@@ -52,15 +52,24 @@ class Board:
         self.num_caselle = num_caselle
         self.board = [Casella()] * (self.num_caselle + 1)
 
+    def _setup_special_boxes(self):
         self.board[6] = Teleport6()
         self.board[42] = Teleport42()
         self.board[58] = Teleport58()
-
         self.board[19] = CasellaBloccaGiocatore()
 
     def move_player(self, player: Player, steps: int):
-        player.index = min(player.index + steps, self.num_caselle)
+        casella_risultante = player.index + steps
+        if casella_risultante > self.num_caselle:
+            player.index = rimbalzo(self.num_caselle, casella_risultante)
+        else:
+            player.index = casella_risultante
         self.board[player.index].trigger(player)
 
     def game_is_over(self, player: Player):
         return player.index == self.num_caselle
+
+
+def rimbalzo(ultima_casella: int, casella_ottenuta: int):
+    backward_steps = casella_ottenuta - ultima_casella
+    return ultima_casella - backward_steps

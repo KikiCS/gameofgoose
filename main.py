@@ -21,6 +21,7 @@ players = [
     for n in range(NUM_PLAYERS)
 ]
 board = Board()
+board._setup_special_boxes()
 game_over = False
 
 while not game_over:
