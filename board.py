@@ -41,6 +41,12 @@ class Teleport58(Teleport):
         print("Oh no! Lo scheletro ti fa tornare alla casella di partenza!")
 
 
+class CasellaBloccaGiocatore(Casella):
+    def trigger(self, player: Player):
+        player.can_move_next_turn = False
+        print("Locanda! Le gozzoviglie ti bloccano per un turno!")
+
+
 class Board:
     def __init__(self, num_caselle: int = 63):
         self.num_caselle = num_caselle
@@ -49,6 +55,8 @@ class Board:
         self.board[6] = Teleport6()
         self.board[42] = Teleport42()
         self.board[58] = Teleport58()
+
+        self.board[19] = CasellaBloccaGiocatore()
 
     def move_player(self, player: Player, steps: int):
         player.index = min(player.index + steps, self.num_caselle)
